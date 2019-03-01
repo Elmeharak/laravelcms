@@ -37,9 +37,5 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-  public function login(){
-     $request = request();
-
-    $user = User::where('email', $request->email)->OrWhere('phone', $request->email)->first();
-    }
+//
 }
