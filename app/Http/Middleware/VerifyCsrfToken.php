@@ -23,5 +23,6 @@ class VerifyCsrfToken extends Middleware
         'GetSubCountry',
         'deleteOfferImage',
         'deleteGallery',
+        'deleteCountryImage'
     ];
 }

@@ -28,6 +28,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('deleteGallery', 'AdminOffersController@deleteGallery');
 
+Route::post('deleteCountryImage', 'AdminCountriesController@deleteCountryImage');
+
 Route::resource('admin/users', 'AdminUsersController');
 
 Route::get('admin/categories/delete/{id}', 'AdminCategoriesController@delete');

@@ -1,4 +1,4 @@
-
+0
 
 @extends('layouts.Admin')
 
@@ -20,10 +20,10 @@
         {!! Form::label('country_code', 'Country Code') !!}
         {!! Form::text('country_code', null, ['class' => 'form-control']) !!}
     </div>
-    {{--<div class="form-group">--}}
-        {{--{!! Form::label('gov', 'Countries') !!}--}}
-        {{--{!! Form::select('gov', ['0' => 'Main Countries'] + $countries, null, ['class' => 'form-control']) !!}--}}
-    {{--</div>--}}
+    <div class="form-group">
+        {!! Form::label('image','Image') !!}
+        {!! Form::file('image',['class' =>'form-control']) !!}
+    </div>
 
     <div class="form-group">
 

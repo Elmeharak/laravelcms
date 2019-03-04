@@ -10,7 +10,7 @@ class offerImage extends Model
 
 protected $fillable=[
     'offer_id',
-    'image'
+    'offer_image'
 ];
 
 }

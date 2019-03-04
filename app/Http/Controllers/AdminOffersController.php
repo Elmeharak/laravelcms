@@ -83,11 +83,12 @@ class AdminOffersController extends Controller
 
         if($file = $request->file('images')){
             $img_arr = [];
-            $img_arr['offer_id'] =$offer->offer_id;
+            $img_arr['offer_id']=$offer->offer_id;
             foreach ($file as $k => $image){
                 $name = time() .'-'. $k . '.' .$image->getClientOriginalExtension();
                 $image->move(public_path('images'), $name);
-                $img_arr['image'] = $name;
+                $img_arr['offer_image'] =$name;
+
                 offerImage::create($img_arr);
             }
         }
@@ -144,7 +145,7 @@ class AdminOffersController extends Controller
 
         $govs = governorate::where('country_id', $offer->country_id)->pluck('gov_name', 'gov_id')->all();
 
-        $images=offerImage::where('offer_id',$offer->offer_id)->pluck('image', 'id')->all();
+        $images=offerImage::where('offer_id',$offer->offer_id)->pluck('offer_image', 'id')->all();
 
         return view('admin.offers.edit',compact('offer','countries', 'govs' ,'images'));
 
@@ -185,9 +186,9 @@ class AdminOffersController extends Controller
             $img_arr = [];
             $img_arr['offer_id'] =$offer->offer_id;
             foreach ($file as $k => $image){
-                $name = time() .$k . '.' .$image->getClientOriginalExtension();
+                $name = time() .'-'.$k . '.' .$image->getClientOriginalExtension();
                 $image->move(public_path('images'), $name);
-                $img_arr['image'] = $name;
+                $img_arr['offer_image'] =$name;
                 offerImage::create($img_arr);
             }
         }
