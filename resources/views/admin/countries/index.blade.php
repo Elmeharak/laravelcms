@@ -9,6 +9,7 @@
  <table class="table">
         <thead>
             <th>#</th>
+            <th>Country Flag</th>
             <th>Name</th>
             <th>Code</th>
             <th>Created</th>
@@ -22,6 +23,7 @@
 
                     <tr>
                         <td>{{$key +1}}</td>
+                        <td>    <img src="{{url('images/country')}}/{{$country->country_flag}}" height="40px" alt=""></td>
                         <td><a href="{{route('countries.edit', ['id' => $country->country_id])}}">{{$country->country_name}}</a></td>
                         <td>{{$country->country_code}}</td>
                         <td>{{$country->created_at->diffForHumans()}}</td>

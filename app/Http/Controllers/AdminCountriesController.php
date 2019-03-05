@@ -7,6 +7,8 @@ use App\governorate;
 use App\Http\Requests\countriesRrquest;
 use Illuminate\Http\Request;
 use App\country;
+use Illuminate\Support\Facades\File;
+
 class AdminCountriesController extends Controller
 {
     /**
@@ -45,20 +47,26 @@ class AdminCountriesController extends Controller
     public function store(countriesRrquest $request)
     {
         //
-        $country=new country();
-        $country->country_name = $request->country_name;
-        $country->country_code= $request->country_code ;
-        $country->save();
+//        $country=new country();
+//        $country->country_name = $request->country_name;
+//        $country->country_code= $request->country_code ;
+//        $country->save();
+        $input['country_name']=$request->country_name;
+        $input['country_code']=$request->country_code ;
+
+
+
 
         if ($file = $request->file('image')) {
             $name = time() . $file->getClientOriginalName();
             $file->move('images/country', $name);
-            $img['country_id']=$country->country_id;
-            $img['country_image'] = $name;
+//            $img['country_id']=$country->country_id;
+            $input['country_flag']=$name;
 
-            $country_image= CountryImage::create($img);
+//            $country_image= CountryImage::create($img);
         }
-//
+
+        $country=country::create($input);
 
         return redirect('/admin/countries');
     }
@@ -109,16 +117,22 @@ class AdminCountriesController extends Controller
 
         $input = $request->all();
 
-        $countries->update($input);
 
         if ($file = $request->file('image')) {
-            $input['country_id'] =$countries->country_id;
+//            $input['country_id'] =$countries->country_id;
             $name = time() . '.' .$file->getClientOriginalName();
             $file->move(public_path('images/country'), $name);
-            $input['country_image'] = $name;
-            CountryImage::create($input);
+
+            $oldFlag = public_path('images/country/'. $countries->country_flag);
+            if( File::exists($oldFlag) ){
+                File::delete($oldFlag);
+            }
+            $input['country_flag'] = $name;
+//            CountryImage::create($input);
 
         }
+        $countries->update($input);
+
         return redirect('/admin/countries');
     }
 

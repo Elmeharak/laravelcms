@@ -21,7 +21,7 @@
         {!! Form::text('country_code', null, ['class' => 'form-control']) !!}
     </div>
     <div class="form-group">
-        {!! Form::label('image','Image') !!}
+        {!! Form::label('image','Country Flag') !!}
         {!! Form::file('image',['class' =>'form-control']) !!}
     </div>
 

@@ -13,13 +13,11 @@ class country extends Model
         'country_name',
         'country_code',
         'gov',
-        'image_id'
+        'image_id',
+        'country_flag'
     ];
     public function governorate() {
         return $this->hasMany('App\governorate');
     }
-//    public function image()
-//    {
-//        return $this->belongsTo('App\CountryImage','image_id','image_id');
-//    }
+
 }

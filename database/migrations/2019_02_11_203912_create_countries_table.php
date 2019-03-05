@@ -18,6 +18,7 @@ class CreateCountriesTable extends Migration
             $table->string('country_name');
             $table->string('gov')->default(0);
             $table->string('country_code');
+            $table->string('country_flag')->nullable();
             $table->timestamps();
         });
     }
