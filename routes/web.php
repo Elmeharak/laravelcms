@@ -30,6 +30,10 @@ Route::post('deleteGallery', 'AdminOffersController@deleteGallery');
 
 Route::post('deleteCountryImage', 'AdminCountriesController@deleteCountryImage');
 
+Route::post('deleteCat', 'AdminCategoriesController@deleteCat');
+
+Route::post('deleteUser', 'AdminUsersController@deleteUser');
+
 Route::resource('admin/users', 'AdminUsersController');
 
 Route::get('admin/categories/delete/{id}', 'AdminCategoriesController@delete');

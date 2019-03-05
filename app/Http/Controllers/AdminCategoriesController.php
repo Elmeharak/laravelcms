@@ -136,4 +136,17 @@ class AdminCategoriesController extends Controller
         category::find($id)->delete();
         return redirect()->back();
     }
+
+    public function deleteCat(Request $request){
+        if( $request->cat_id && is_numeric($request->cat_id)){
+
+            $cat = category::find($request->cat_id);
+            if($cat){
+                $cat->delete();
+                return json_encode(["status" => 1, "message" => "<div class='alert alert-success'>Categories removed successfully</div>"]);
+            }
+        }
+        return json_encode(["status" => 0, "message" => "<div class='alert alert-danger'>Error !</div>"]);
+
+    }
 }

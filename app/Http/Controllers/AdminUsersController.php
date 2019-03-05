@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use Illuminate\Http\Request;
 use App\User;
 class AdminUsersController extends Controller
@@ -27,8 +28,8 @@ class AdminUsersController extends Controller
     public function create()
     {
         //
-        return view('admin.users.create');
-
+        $roles=Role::pluck('role_name','role_id')->all();
+        return view('admin.users.create' ,compact('roles'));
     }
 
     /**
@@ -40,6 +41,21 @@ class AdminUsersController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+           'name' => 'required',
+            'email' => 'required',
+            'pass' => 'required',
+            'role_id' => 'required',
+
+        ]);
+
+        $input['user_name']=$request->name;
+        $input['user_email']=$request->email;
+        $input['password']=$request->pass;
+        $input['role_id']=$request->role_id;
+        $user=User::create($input);
+        return redirect('/admin/users');
+
     }
 
     /**
@@ -89,5 +105,18 @@ class AdminUsersController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function deleteUser(Request $request){
+        if( $request->user_id && is_numeric($request->user_id)){
+
+            $user = User::find($request->user_id);
+            if($user){
+
+                $user->delete();
+                return json_encode(["status" => 1, "message" => "<div class='alert alert-success'>User removed successfully</div>"]);
+            }
+        }
+        return json_encode(["status" => 0, "message" => "<div class='alert alert-danger'>Error !</div>"]);
+
     }
 }
